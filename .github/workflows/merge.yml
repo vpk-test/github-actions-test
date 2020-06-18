@@ -15,17 +15,31 @@ on:
       - submitted
 
 jobs:
-  merge:
+  automerge:
+    name: Merge pull request
     runs-on: ubuntu-latest
-    name: Merge
     steps:
-      - name: Integration check
-        uses: squalrus/merge-bot@v0.2.0
+      - name: Merge
+        uses: actions/github-script@0.2.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          test: false
-          reviewers: false
-          labels: ready, merge
-          blocking-labels: do not merge
-          checks: false
-          method: squash
+          script: |
+            github.pullRequests.merge({
+              owner: context.payload.repository.owner.login,
+              repo: context.payload.repository.name,
+              pull_number: context.payload.pull_request.number
+            })
+          github-token: ${{ github.token }}
+  # merge:
+  #   runs-on: ubuntu-latest
+  #   name: Merge
+  #   steps:
+  #     - name: Integration check
+  #       uses: squalrus/merge-bot@v0.2.0
+  #       with:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         test: false
+  #         reviewers: false
+  #         labels: ready, merge
+  #         blocking-labels: do not merge
+  #         checks: false
+  #         method: squash
