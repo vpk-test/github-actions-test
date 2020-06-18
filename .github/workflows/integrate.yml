@@ -14,7 +14,8 @@ jobs:
           node-version: 12
       - run: npm i
       - run: npm ci
-      - run: npm test
+			- run: npm test
+			
 	auto-approve:
 		runs-on: ubuntu-latest
 		steps:
