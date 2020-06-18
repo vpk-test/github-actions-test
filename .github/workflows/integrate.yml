@@ -15,8 +15,8 @@ jobs:
       - run: npm i
       - run: npm ci
 			- run: npm test
-			
-	auto-approve:
+
+	auto_approve:
 		runs-on: ubuntu-latest
 		steps:
 			- uses: hmarr/auto-approve-action@v2.0.0
