@@ -1,0 +1,14 @@
+name: Node Continuous Integration
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  auto_approve_3:
+    needs: test_pull_request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hmarr/auto-approve-action@v2.0.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
