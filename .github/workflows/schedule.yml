@@ -5,11 +5,29 @@ on:
     - cron: "*/15 * * * *"
 
 jobs:
-  run_tests:
+  pre_build:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo "This is a test"
-      - run: echo "This a printed line"
-      - run: echo "This is another line"
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Starting builder
+        run: echo "Starting builder"
+      - name: Create local changes
+        run: node builder
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Completion message
+        run: echo "Updated code"
