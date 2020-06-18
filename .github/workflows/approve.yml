@@ -6,7 +6,6 @@ on:
 
 jobs:
   auto_approve_3:
-    needs: test_pull_request
     runs-on: ubuntu-latest
     steps:
       - uses: hmarr/auto-approve-action@v2.0.0
