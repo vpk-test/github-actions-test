@@ -16,7 +16,15 @@ jobs:
       - run: npm ci
       - run: npm test
 
-  auto_approve:
+  auto_approve_1:
+    needs: test_pull_request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hmarr/auto-approve-action@v2.0.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+  auto_approve_2:
     needs: test_pull_request
     runs-on: ubuntu-latest
     steps:
