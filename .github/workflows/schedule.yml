@@ -30,5 +30,12 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: github-action-changes
-      - name: Completion message
+      - name: Commit Completion message
         run: echo "Updated code"
+      - name: Open PR
+        uses: smartinspereira/auto-create-pr-action@0.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          BRANCH_PREFIX: github-action-changes
+          PULL_REQUEST_TITLE: Merging updated time
