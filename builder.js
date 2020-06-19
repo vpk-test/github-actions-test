@@ -1,3 +1,3 @@
 const fs = require("fs");
 
-fs.writeFile("output.json", `"${new Date().toLocaleDateString()}"`, () => {});
+fs.writeFile("output.json", `"${new Date().toLocaleTimeString()}"`, () => {});
