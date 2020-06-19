@@ -33,6 +33,11 @@ jobs:
           branch: github-action-changes
       - name: Commit Completion message
         run: echo "Updated code"
+
+  open_pr:
+    runs-on: ubuntu-latest
+    needs: pre_build
+    steps:
       - name: Open PR
         uses: smartinspereira/auto-create-pr-action@master
         with:
