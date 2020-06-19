@@ -39,4 +39,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         env:
           BRANCH_PREFIX: github-action-changes
+          BASE_BRANCH: master
           PULL_REQUEST_TITLE: Merging updated time
