@@ -36,7 +36,7 @@ jobs:
       - name: Open PR
         uses: smartinspereira/auto-create-pr-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         env:
           BRANCH_PREFIX: github-action-changes
           BASE_BRANCH: master
