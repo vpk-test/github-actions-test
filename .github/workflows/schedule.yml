@@ -33,7 +33,7 @@ jobs:
       - name: Commit Completion message
         run: echo "Updated code"
       - name: Open PR
-        uses: smartinspereira/auto-create-pr-action@0.1.0
+        uses: smartinspereira/auto-create-pr-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         env:
