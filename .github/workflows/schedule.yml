@@ -1,4 +1,4 @@
-name: Scheduled test
+name: Automated updates
 
 on:
   schedule:
