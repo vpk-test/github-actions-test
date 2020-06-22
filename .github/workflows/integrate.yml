@@ -3,6 +3,8 @@ name: Node Continuous Integration
 on:
   pull_request:
     branches: [master]
+    types:
+      - opened
 
 jobs:
   test:
@@ -13,6 +15,7 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           reviewers: "github-actions"
+          team-reviewers: ""
 
   test_pull_request:
     runs-on: ubuntu-latest
