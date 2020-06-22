@@ -24,24 +24,23 @@ jobs:
       - run: npm i
       - run: npm ci
       - run: npm test
-
-  automerge:
-    name: Merge pull request
-    needs:
-      - test_pull_request
-      - auto_approve_1
-    runs-on: ubuntu-latest
-    steps:
-      - name: Merge
-        uses: actions/github-script@0.2.0
-        with:
-          script: |
-            github.pullRequests.merge({
-              owner: context.payload.repository.owner.login,
-              repo: context.payload.repository.name,
-              pull_number: context.payload.pull_request.number
-            })
-          github-token: ${{ github.token }}
+  # automerge:
+  #   name: Merge pull request
+  #   needs:
+  #     - test_pull_request
+  #     - auto_approve_1
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Merge
+  #       uses: actions/github-script@0.2.0
+  #       with:
+  #         script: |
+  #           github.pullRequests.merge({
+  #             owner: context.payload.repository.owner.login,
+  #             repo: context.payload.repository.name,
+  #             pull_number: context.payload.pull_request.number
+  #           })
+  #         github-token: ${{ github.token }}
   # auto_approve_1:
   #   needs: test_pull_request
   #   runs-on: ubuntu-latest
