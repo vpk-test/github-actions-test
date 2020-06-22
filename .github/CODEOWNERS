@@ -1,1 +1,1 @@
-/index.js @github-actions
+*.js @github-actions @vishwalpk
