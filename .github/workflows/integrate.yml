@@ -12,8 +12,8 @@ jobs:
         uses: kunihiko-t/review-request-action@v0.1.3
         with:
           repo-token: ${{ secrets.TOKEN }}
-          reviewers: "github-actions
-  
+          reviewers: "github-actions"
+
   test_pull_request:
     runs-on: ubuntu-latest
     steps:
