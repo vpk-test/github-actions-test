@@ -5,8 +5,16 @@ on:
     - cron: "*/5 * * * *"
 
 jobs:
+  pre_pre_build:
+    runs-on: ubuntu-latest
+    name: get diff
+    steps:
+      - run: git diff github-action-changes...master
+
   pre_build:
     name: Run tests
+    needs: 
+      - pre_pre_build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
