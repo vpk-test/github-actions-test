@@ -1,4 +1,4 @@
-const oneplusone = () => 2;
+const oneplusone = () => 1;
 console.log(oneplusone);
 console.log(oneplusone);
 module.exports = oneplusone;
