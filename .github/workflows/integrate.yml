@@ -10,6 +10,11 @@ on:
       - edited
 
 jobs:
+  print_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message
+        run: echo "This is a message"
   test:
     runs-on: ubuntu-latest
     steps:
