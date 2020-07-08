@@ -1,6 +1,9 @@
 name: Node Continuous Integration
 
 on:
+  check_suite:
+    types:
+      - completed
   pull_request:
     branches: [master]
 
