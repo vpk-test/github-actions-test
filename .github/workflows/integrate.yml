@@ -11,9 +11,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       
       - name: Changed files
-        run: git diff --name-only origin/master...${{ github.head_ref }} --
+        run: git diff --name-only origin/master...${{ github.head_ref }}
         
   print_message:
     runs-on: ubuntu-latest
