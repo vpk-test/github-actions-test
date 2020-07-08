@@ -15,7 +15,7 @@ jobs:
           ref: ${{ github.head_ref }}
       
       - name: Changed files
-        run: git diff --name-only origin/master...origin/${{ github.head_ref }} -- *
+        run: git diff --name-only origin/master
         
   print_message:
     runs-on: ubuntu-latest
