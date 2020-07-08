@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello"
-      # - uses: hmarr/auto-approve-action@v2.0.0
-      #   with:
-      #     github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: hmarr/auto-approve-action@v2.0.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
       - run: echo "PR prevented"
