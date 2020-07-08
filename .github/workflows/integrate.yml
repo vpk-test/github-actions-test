@@ -14,6 +14,8 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
       
+      - run: git branch
+      
       - name: Changed files
         run: |
           git branch
