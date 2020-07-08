@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print message
-        run: echo "Build triggered by ${{ github.head_ref }} PR"
+        run: sleep(30000) && echo "Build triggered by ${{ github.head_ref }} PR"
   test:
     runs-on: ubuntu-latest
     steps:
