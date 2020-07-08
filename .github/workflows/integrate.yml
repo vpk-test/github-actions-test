@@ -6,6 +6,15 @@ on:
       - master
 
 jobs:
+  get-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Changed files
+        run: git diff --name-only master...${{ github.head_ref }}
+        
   print_message:
     runs-on: ubuntu-latest
     steps:
