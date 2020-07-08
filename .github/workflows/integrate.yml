@@ -13,13 +13,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
+          fetch-depth: 0
       
       - run: git branch
       
       - name: Changed files
         run: |
           git branch
-          git diff --name-only origin/master -- *
+          git diff --name-only master...${{ github.head_ref }} -- *
         
   print_message:
     runs-on: ubuntu-latest
