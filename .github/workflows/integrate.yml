@@ -2,11 +2,23 @@ name: Node Continuous Integration
 
 on:
   pull_request:
-    branches: [master]
+    branches: 
+      - master
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Send Review Request"
+        uses: kunihiko-t/review-request-action@v0.1.3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          reviewers: "github-actions"
+          team-reviewers: ""
+
   test_pull_request:
     runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, "refs/heads/github-action")
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -15,37 +27,34 @@ jobs:
       - run: npm i
       - run: npm ci
       - run: npm test
-
-  automerge:
-    name: Merge pull request
-    needs:
-      - test_pull_request
-      - auto_approve_1
-    runs-on: ubuntu-latest
-    steps:
-      - name: Merge
-        uses: actions/github-script@0.2.0
-        with:
-          script: |
-            github.pullRequests.merge({
-              owner: context.payload.repository.owner.login,
-              repo: context.payload.repository.name,
-              pull_number: context.payload.pull_request.number
-            })
-          github-token: ${{ github.token }}
-
-  auto_approve_1:
-    needs: test_pull_request
-    runs-on: ubuntu-latest
-    steps:
-      - uses: hmarr/auto-approve-action@v2.0.0
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-
-  auto_approve_2:
-    needs: auto_approve_1
-    runs-on: ubuntu-latest
-    steps:
-      - uses: hmarr/auto-approve-action@v2.0.0
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+  # automerge:
+  #   name: Merge pull request
+  #   needs:
+  #     - test_pull_request
+  #     - auto_approve_1
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Merge
+  #       uses: actions/github-script@0.2.0
+  #       with:
+  #         script: |
+  #           github.pullRequests.merge({
+  #             owner: context.payload.repository.owner.login,
+  #             repo: context.payload.repository.name,
+  #             pull_number: context.payload.pull_request.number
+  #           })
+  #         github-token: ${{ github.token }}
+  # auto_approve_1:
+  #   needs: test_pull_request
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: hmarr/auto-approve-action@v2.0.0
+  #       with:
+  #         github-token: "${{ secrets.GITHUB_TOKEN }}"
+  # auto_approve_2:
+  #   needs: auto_approve_1
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: hmarr/auto-approve-action@v2.0.0
+  #       with:
+  #         github-token: "${{ secrets.GITHUB_TOKEN }}"

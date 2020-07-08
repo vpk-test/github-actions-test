@@ -1,16 +1,25 @@
-name: Scheduled test
+name: Automated updates
 
 on:
   schedule:
     - cron: "*/5 * * * *"
 
 jobs:
+  pre_pre_build:
+    runs-on: ubuntu-latest
+    name: get diff
+    steps:
+      - run: git diff github-action-changes...master
+
   pre_build:
     name: Run tests
+    needs: 
+      - pre_pre_build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: github-action-changes
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - uses: actions/setup-node@v1
@@ -24,18 +33,21 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -m "Add changes" -a
+          git commit -m "Automated changes" -a
       - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: github-action-changes
+        run: git push
       - name: Commit Completion message
         run: echo "Updated code"
+
+  open_pr:
+    runs-on: ubuntu-latest
+    needs: pre_build
+    steps:
       - name: Open PR
         uses: smartinspereira/auto-create-pr-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         env:
           BRANCH_PREFIX: github-action-changes
+          BASE_BRANCH: master
           PULL_REQUEST_TITLE: Merging updated time

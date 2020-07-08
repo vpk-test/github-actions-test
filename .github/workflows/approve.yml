@@ -8,6 +8,18 @@ jobs:
   auto_approve_3:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "Hello"
       - uses: hmarr/auto-approve-action@v2.0.0
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - run: echo "PR prevented"
+  
+  throw_failure:
+    runs-on: ubuntu-latest
+    needs: auto_approve_3
+    steps:
+      - run: |
+          echo "Forcing failure" && \
+            echo "Testing multiline command" \
+            && exit 1
+          
