@@ -6,6 +6,11 @@ on:
       - master
 
 jobs:
+  print_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message
+        run: echo "Build triggered by ${{ github.head_ref }} PR"
   test:
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +23,7 @@ jobs:
 
   test_pull_request:
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, "refs/heads/github-action")
+    if: startsWith(github.head_ref, 'github-action')
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
