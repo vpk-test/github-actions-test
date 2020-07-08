@@ -4,10 +4,6 @@ on:
   pull_request:
     branches: 
       - master
-    types:
-      - opened
-      - reopened
-      - edited
 
 jobs:
   print_message:
@@ -27,7 +23,7 @@ jobs:
 
   test_pull_request:
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, "refs/heads/github-action")
+    if: startsWith(github.head_ref, 'refs/heads/github-action')
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
