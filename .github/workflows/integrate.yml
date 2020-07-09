@@ -21,7 +21,7 @@ jobs:
         run: git fetch origin master
       - run: git branch
       - run: git diff --name-only origin/master...${{ github.head_ref }} -- *
-      - run: git diff --name-only origin/master...${{ github.head_ref }} -- * | grep -Eq '^(index\.js)|(output\.json)$' || echo "It worked"
+      - run: git diff --name-only origin/master...${{ github.head_ref }} -- * | grep -Eq '^(indexx\.js)|(output\.json)$' || echo "It failed"
         name: Code difference
         
   print_message:
