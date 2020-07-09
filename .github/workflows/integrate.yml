@@ -17,10 +17,11 @@ jobs:
       
       - run: git branch
       
-      - name: Changed files
+      - name: Fetch origin/master
         run: git fetch origin master
       - run: git branch
-      - run: git diff --name-only origin/master...${{ github.head_ref }} -- *
+      - run: git diff --name-only origin/master...${{ github.head_ref }} -- * | grep -Evc '^(index.js|output.json)$' && exit 1
+        name: Code difference
         
   print_message:
     runs-on: ubuntu-latest
