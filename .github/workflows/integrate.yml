@@ -20,7 +20,7 @@ jobs:
       - name: Changed files
         run: git fetch origin master
       - run: git branch
-      - run: git diff --name-only master...${{ github.head_ref }} -- *
+      - run: git diff --name-only origin/master...${{ github.head_ref }} -- *
         
   print_message:
     runs-on: ubuntu-latest
