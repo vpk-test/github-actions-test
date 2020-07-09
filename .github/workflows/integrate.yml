@@ -18,7 +18,6 @@ jobs:
       
       - name: Changed files
         run: |
-          git branch
           git diff --name-only master...${{ github.head_ref }} -- *
         
   print_message:
