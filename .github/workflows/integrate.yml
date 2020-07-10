@@ -21,7 +21,7 @@ jobs:
         run: git fetch origin master
       - run: git branch
       - run: git diff --name-only origin/master...${{ github.head_ref }} -- *
-      - run: git diff --name-only origin/master...${{ github.head_ref }} -- * | ((grep -Evc '^(index\.js)|(output\.json)$' && (echo "Changes to unauthorized files"; exit 1)) || echo "Only authoried files were changed")
+      - run: git diff --name-only origin/master...${{ github.head_ref }} -- * | ((grep -Evc '^(index\.js)|(output\.json)$' && (echo "Changes to unauthorized files" && exit 1)) || echo "Only authoried files were changed")
         name: Code difference
         
   print_message:
