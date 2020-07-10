@@ -17,7 +17,10 @@ jobs:
       
       - run: git branch
       
-      - name: Fetch origin/master
+      - name: actor
+        run: echo "Actor is: ${{ github.actor }}"
+      
+      - name: Fetch origin/mastuner
         run: git fetch origin master
       - run: git branch
       - run: git diff --name-only origin/master...${{ github.head_ref }} -- *
