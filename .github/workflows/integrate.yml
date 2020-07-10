@@ -6,6 +6,20 @@ on:
       - master
 
 jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            octokit.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              event: 'APPROVE'
+            })
+  
   get-diff:
     runs-on: ubuntu-latest
     steps:
@@ -19,6 +33,7 @@ jobs:
       
       - name: actor
         run: echo "Actor is ${{ github.actor }}"
+      
       
       - name: Fetch origin/mastuner
         run: git fetch origin master
