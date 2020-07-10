@@ -40,7 +40,7 @@ jobs:
       - run: git branch
       - run: git diff --name-only origin/master...${{ github.head_ref }} -- *
       - run: |
-          $([[ grep -Evc '^(index\.js)|(output\.json)$' $(git diff --name-only origin/master...${{ github.head_ref }} -- *) != 0 ]]) && (echo "Unauthorized files were changed"; exit 215);
+          git diff --name-only origin/master...${{ github.head_ref }} -- * | sed -E 's/^(index\.js)|(output\.json)$//g' | grep * && exit 1
         name: Code difference
         
   print_message:
