@@ -18,7 +18,7 @@ jobs:
       - run: git branch
       
       - name: actor
-        run: echo "Actor is: ${{ github.actor }}"
+        run: echo "Actor is ${{ github.actor }}"
       
       - name: Fetch origin/mastuner
         run: git fetch origin master
