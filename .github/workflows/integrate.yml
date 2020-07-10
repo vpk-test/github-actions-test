@@ -6,14 +6,14 @@ on:
       - master
 
 jobs:
-  comment:
+  github-autoapprove:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            octokit.pulls.createReview({
+            github.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
