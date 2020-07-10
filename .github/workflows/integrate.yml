@@ -40,7 +40,7 @@ jobs:
       - run: git branch
       - run: git diff --name-only origin/master...${{ github.head_ref }} -- *
       - run: |
-          git diff --name-only origin/master...${{ github.head_ref }} -- * | sed -E 's/^(index\.js)|(output\.json)$//g' | grep * && exit 213
+          git diff --name-only origin/master...${{ github.head_ref }} -- * | sed -E 's/^(index\.js)|(output\.json)$//g' | grep -E '.+' && exit 213
         name: Code difference
         
   print_message:
