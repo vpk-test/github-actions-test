@@ -16,11 +16,18 @@ jobs:
 #         with:
 #           github-token: "${{ secrets.GITHUB_TOKEN }}"
 #       - run: echo "PR prevented"
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
   
   throw_failure:
     if: startsWith(github.head_ref, 'github-action')
     runs-on: ubuntu-latest
-    needs: auto_approve_3
+#     needs: auto_approve_3
     steps:
       - run: |
           echo "Forcing failure" && \
