@@ -18,7 +18,7 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.issue.number,
               event: 'COMMENT',
-              body: 'This is a test'
+              body: 'This is a test @vishwalpk'
             })
   
   get-diff:
