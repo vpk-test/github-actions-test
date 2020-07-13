@@ -17,7 +17,8 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
-              event: 'APPROVE'
+              event: 'COMMENT',
+              body: 'This is a test'
             })
   
   get-diff:
