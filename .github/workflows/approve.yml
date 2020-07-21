@@ -9,10 +9,11 @@ on:
 
 jobs:
   dummy-message:
-    
+    runs-on: ubuntu-latest
     name: dummy-message
     steps:
       - run: echo "this is a line"
+
 #   auto_approve_3:
 #     runs-on: ubuntu-latest
 #     steps:
