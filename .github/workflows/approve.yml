@@ -9,6 +9,7 @@ on:
 
 jobs:
   print_message:
+    name: print-message
     steps:
       - run: echo "This is a message"
 
