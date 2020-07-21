@@ -8,6 +8,11 @@ on:
     branches: [master]
 
 jobs:
+  dummy-message:
+    
+    name: dummy-message
+    steps:
+      - run: echo "this is a line"
 #   auto_approve_3:
 #     runs-on: ubuntu-latest
 #     steps:
