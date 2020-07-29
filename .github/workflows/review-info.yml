@@ -2,7 +2,7 @@ name: PR approval info
 
 on:
   pull_request_review:
-    types:
+    action:
       - submitted
         
 jobs:
