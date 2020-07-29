@@ -6,8 +6,8 @@ on:
       - submitted
   
   pull_request:
-    types: 
-      - opened
+    branches: 
+      - master
         
 jobs:
   count_reviews:
