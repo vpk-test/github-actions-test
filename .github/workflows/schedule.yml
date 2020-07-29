@@ -42,6 +42,7 @@ jobs:
   open_pr:
     runs-on: ubuntu-latest
     needs: pre_build
+    name: pre-build
     steps:
       - name: Open PR
         uses: smartinspereira/auto-create-pr-action@master

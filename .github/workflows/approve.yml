@@ -8,6 +8,12 @@ on:
     branches: [master]
 
 jobs:
+  dummy-message:
+    runs-on: ubuntu-latest
+    name: dummy-message
+    steps:
+      - run: echo "this is a line"
+
   auto_approve_3:
     runs-on: ubuntu-latest
     steps:
@@ -15,12 +21,20 @@ jobs:
       - uses: hmarr/auto-approve-action@v2.0.0
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-      - run: echo "PR prevented"
+#       - run: echo "PR prevented"
+
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
   
   throw_failure:
     if: startsWith(github.head_ref, 'github-action')
     runs-on: ubuntu-latest
-    needs: auto_approve_3
+#     needs: auto_approve_3
     steps:
       - run: |
           echo "Forcing failure" && \
