@@ -18,9 +18,7 @@ jobs:
             }).then(res => {
               const reviews = res.data;
               console.log(
-                Array.isArray(reviews),
-                typeof reviews,
-                reviews.length
+                new Set(reviews.filter(({ state }) => state === 'APPROVED').map(({ user }) => user.id).size
               );
             });
             
