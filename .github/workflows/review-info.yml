@@ -11,10 +11,13 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            const reviews = github.pulls.listReviews({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            
             console.log(
-              github.pulls.listReviews({
-                pull_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo
-              }).length
-            )
+              Array.isArray(reviews),
+              typeof reviews,
+            );
