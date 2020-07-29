@@ -15,11 +15,12 @@ jobs:
               pull_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo
-            }).then(reviews => {
+            }).then(res => {
+              const reviews = res.data;
               console.log(
                 Array.isArray(reviews),
                 typeof reviews,
-                reviews
+                reviews.length
               );
             });
             
