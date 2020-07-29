@@ -6,14 +6,44 @@ on:
       - master
 
 jobs:
+  github-autoapprove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v2
+        if: github.actor != 'asdvdasds'
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              event: 'COMMENT',
+              body: 'This is a test @vishwalpk'
+            })
+  
   get-diff:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
       
-      - name: Changed files
-        run: git diff --name-only origin/master...${{ github.head_ref }} --
+      - run: git branch
+      
+      - name: actor
+        run: echo "Actor is ${{ github.actor }}"
+      
+      
+      - name: Fetch origin/mastuner
+        run: git fetch origin master
+      - run: git branch
+      - run: git diff --name-only origin/master...${{ github.head_ref }} -- *
+      - run: |
+          git diff --name-only origin/master...${{ github.head_ref }} -- * | sed -E 's/^(index\.js)|(output\.json)$//g' | grep -E '.+' && exit 213
+        name: Code difference
         
   print_message:
     runs-on: ubuntu-latest

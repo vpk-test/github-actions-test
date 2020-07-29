@@ -8,24 +8,32 @@ on:
     branches: [master]
 
 jobs:
-  print_message:
-    name: print-message
+  dummy-message:
+    runs-on: ubuntu-latest
+    name: dummy-message
     steps:
-      - run: echo "This is a message"
+      - run: echo "this is a line"
 
-  auto_approve_3:
+#   auto_approve_3:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "Hello"
+#       - uses: hmarr/auto-approve-action@v2.0.0
+#         with:
+#           github-token: "${{ secrets.GITHUB_TOKEN }}"
+#       - run: echo "PR prevented"
+  label:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello"
-      - uses: hmarr/auto-approve-action@v2.0.0
+      - uses: actions/labeler@v2
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-      - run: echo "PR prevented"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
   
   throw_failure:
     if: startsWith(github.head_ref, 'github-action')
     runs-on: ubuntu-latest
-    needs: auto_approve_3
+#     needs: auto_approve_3
     steps:
       - run: |
           echo "Forcing failure" && \
