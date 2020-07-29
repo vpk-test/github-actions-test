@@ -1,8 +1,11 @@
 name: Automated updates
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
+  push:
+    branches: 
+      - non-existent-branch
+  #schedule:
+  #  - cron: "*/5 * * * *"
 
 jobs:
   pre_pre_build:
