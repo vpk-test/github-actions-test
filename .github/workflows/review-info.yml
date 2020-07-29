@@ -11,8 +11,10 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            console.log(github.pulls.listReviews({
-              pull_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            }).length)
+            console.log(
+              github.pulls.listReviews({
+                pull_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              }).length
+            )
