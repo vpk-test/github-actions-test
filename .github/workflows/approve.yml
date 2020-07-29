@@ -23,7 +23,7 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 #       - run: echo "PR prevented"
 
-label:
+  label:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/labeler@v2
