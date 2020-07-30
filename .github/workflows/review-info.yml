@@ -14,6 +14,7 @@ on:
 
 jobs:
   count_reviews:
+    if: github.head_ref == 'github-action-changes'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v2
