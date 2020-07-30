@@ -1,0 +1,30 @@
+name: Create a new branch and open PR
+on:
+  push:
+    branches:
+      - test-patch
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: touch random.txt
+      - name: Create PR
+        run: |
+          export BRANCH_NAME=a-new-branch-$(date -u +%Y%m%d%H%M%S)
+          git checkout -b $BRANCH_NAME
+          git config --global user.email "random@this-is-a-random-non-existent-website.com"
+          git config --global user.name "Random name"
+          git add . && git commit -m "Created branch" && git push -u origin $BRANCH_NAME
+          # gh pr create --base master --title "Automated PR"
+          curl -s -u ${{ github.repo.owner }}:${{ secrets.GITHUB_TOKEN }} \
+            -H "Accept:application/vnd.github.sailor-v-preview-json" \
+              https://api.github.com/repos/vpk-test/github-actions-test/pulls \
+            -X POST -d "{ \"title\": \"Automated PR\",\
+                 \"draft\": false, \
+                 \"head\": \"$BRANCH_NAME\", \
+                 \"base\": \"master\" \
+              } "
