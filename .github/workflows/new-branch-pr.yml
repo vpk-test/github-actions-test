@@ -8,6 +8,7 @@ jobs:
   create-pr:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: touch random.txt
       - name: Create PR
         run: |
