@@ -1,0 +1,20 @@
+name: Create a new branch and open PR
+on:
+  push:
+    branches:
+      - test-patch
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - run: touch random.txt
+      - name: Create PR
+        run: |
+          BRANCH_NAME=a-new-branch-$(date -u +%Y%m%d%H%M%S)
+          git checkout -b $BRANCH_NAME
+          git add . && git commit -m "Created branch" && git push -u origin $BRANCH_NAME
+          gh pr create --base master --title "Automated PR"
+          #curl -s -u ${{ github.repo.owner }}:${{ secrets.GITHUB_TOKEN }} \\
+          #   -H "Accept:application/vnd.github.sailor-v-preview-json" \\
+          #     https://
