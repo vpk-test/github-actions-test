@@ -2,9 +2,6 @@ name: PR approval info
 
 on:
   pull_request:
-    types: 
-      - edited
-      - reopened
     branches:
       - master
   pull_request_review:
