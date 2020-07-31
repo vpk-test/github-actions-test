@@ -11,7 +11,7 @@ on:
 
 jobs:
   count_reviews:
-    if: github.head_ref == 'github-action-changes' || github.ref == 'github-action-changes'
+    if: github.head_ref == 'github-action-changes' || github.event.pull_request.head.ref == 'github-action-changes'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v2
