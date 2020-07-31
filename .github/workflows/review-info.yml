@@ -1,17 +1,17 @@
 name: PR approval info
 
 on:
-  push:
-    paths: 
-      - '**/*'
-  #pull_request:
-  #  types: 
+  #push:
+  #  paths: 
+  #    - '**/*'
+  pull_request:
+    types: 
   #    - reopened
   #    - labeled
-  #    - edited
-  #    - synchronize
-  #  branches:
-  #    - master
+      - edited
+      - synchronize
+    branches:
+      - master
   pull_request_review:
     types:
       - submitted
