@@ -29,4 +29,13 @@ jobs:
               if (reviewCount < 2) throw new Error("You require at least 2 reviews for this PR");
             });
             
+            github.pulls.addLabels({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: {
+                labels: ['reviews-submitted']
+              }
+            });
+            
             
