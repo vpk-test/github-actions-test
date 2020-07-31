@@ -1,4 +1,4 @@
 const oneplusone = () => 2;
-const logNumbers = () => console.log([1]);
+const logNumbers = () => console.log([1, 2]);
 
 module.exports = oneplusone;
