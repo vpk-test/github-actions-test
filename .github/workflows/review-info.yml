@@ -11,7 +11,7 @@ on:
 
 jobs:
   count_reviews:
-    if: github.head_ref == 'github-action-changes' || github.ref == 'github-action-changes'
+    if: github.head_ref == 'github-action-changes' || github.event.pull_request.head.ref == 'github-action-changes'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v2
@@ -27,6 +27,15 @@ jobs:
               console.log(reviews);
               const reviewCount = new Set(reviews.filter(({ state }) => state === 'APPROVED').map(({ user }) => user.id)).size;
               if (reviewCount < 2) throw new Error("You require at least 2 reviews for this PR");
+            });
+            
+            github.pulls.addLabels({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: {
+                labels: ['reviews-submitted']
+              }
             });
             
             
