@@ -6,8 +6,8 @@ on:
   #    - '**/*'
   pull_request:
     types: 
-  #    - reopened
-  #    - labeled
+      - reopened
+      - labeled
       - edited
       - synchronize
     branches:
