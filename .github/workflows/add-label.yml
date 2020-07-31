@@ -1,0 +1,35 @@
+name: Add PR label
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+
+
+jobs:
+  count_reviews:
+    if: github.head_ref == 'github-action-changes' || github.event.pull_request.head.ref == 'github-action-changes'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.pulls.listReviews({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            }).then(res => {
+              const reviews = res.data;
+              console.log(reviews);
+              const reviewCount = new Set(reviews.filter(({ state }) => state === 'APPROVED').map(({ user }) => user.id)).size;
+              if (reviewCount >= 2) {
+                github.issues.addLabels({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  labels: ['reviews-submitted']
+                });
+              }
+            });
+            
