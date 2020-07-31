@@ -4,14 +4,14 @@ on:
   #push:
   #  paths: 
   #    - '**/*'
-  pull_request:
-    types: 
-      - reopened
-      - labeled
-      - edited
-      - synchronize
-    branches:
-      - master
+  #pull_request:
+  #  types: 
+  #    - reopened
+  #    - labeled
+  #    - edited
+  #    - synchronize
+  #  branches:
+  #    - master
   pull_request_review:
     types:
       - submitted
