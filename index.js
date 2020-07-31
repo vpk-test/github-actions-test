@@ -9,5 +9,6 @@ const oneplus8 = () => 9;
 const oneplus9 = () => 10;
 const oneplus10 = () => 11;
 const oneplus11 = () => 12;
+const oneplus12 = () => 13;
 
 module.exports = oneplusone;
