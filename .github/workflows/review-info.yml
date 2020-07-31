@@ -16,7 +16,6 @@ on:
     types:
       - submitted
 
-
 jobs:
   count_reviews:
     if: github.head_ref == 'github-action-changes' || github.event.pull_request.head.ref == 'github-action-changes'
