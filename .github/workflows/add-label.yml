@@ -24,12 +24,14 @@ jobs:
               console.log(reviews);
               const reviewCount = new Set(reviews.filter(({ state }) => state === 'APPROVED').map(({ user }) => user.id)).size;
               if (reviewCount < 2) {
-                #github.issues.addLabels({
-                #  issue_number: context.issue.number,
-                #  owner: context.repo.owner,
-                #  repo: context.repo.repo,
-                #  labels: ['reviews-submitted']
-                #});
+              /*
+                github.issues.addLabels({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  labels: ['reviews-submitted']
+                });
+              */
               }
             });
             
