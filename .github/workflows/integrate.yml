@@ -6,6 +6,16 @@ on:
       - master
 
 jobs:
+  check_failure:
+    runs-on:ubuntu-latest
+    steps:
+      - run: echo "value"
+        if: env.VALUE == 'value'
+      - run: echo "hello"
+        if: 'value' == 'value'
+        with:
+          env:
+            - VALUE: value
   github-autoapprove:
     runs-on: ubuntu-latest
     steps:
