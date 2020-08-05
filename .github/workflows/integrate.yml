@@ -56,6 +56,8 @@ jobs:
       - name: Set env
         run: |
           CHANGED_FILES="$(git diff --name-only origin/master...${{ github.head_ref }} -- *)"
+          echo "$CHANGED_FILES" | grep 'index.js'
+          echo "$CHANGED_FILES" | grep 'package.json'
           # CHANGED_FILES="${CHANGED_FILES//'%'/'%25'}"
           CHANGED_FILES="${CHANGED_FILES//$'\n'/'%0A'}"
           # CHANGED_FILES="${CHANGED_FILES//$'\r'/'%0D'}"
