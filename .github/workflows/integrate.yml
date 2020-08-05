@@ -56,9 +56,9 @@ jobs:
       - name: Set env
         run: |
           CHANGED_FILES="$(git diff --name-only origin/master...${{ github.head_ref }} -- *)"
-          echo "$CHANGED_FILES" | grep 'index.js' | awk '{print "main file $0"}'
-          echo "$CHANGED_FILES" | grep 'package.json' | awk '{print "package file $0"}'
-          echo "$CHANGED_FILES" | grep '*' | awk '{print "files $0"}'
+          echo "$CHANGED_FILES" | grep 'index.js' | awk '{print "main file" $0}'
+          echo "$CHANGED_FILES" | grep 'package.json' | awk '{print "package file" $0}'
+          echo "$CHANGED_FILES" | grep -E '.*' | awk '{print "files" $0}'
           # CHANGED_FILES="${CHANGED_FILES//'%'/'%25'}"
           CHANGED_FILES="${CHANGED_FILES//$'\n'/'%0A'}"
           # CHANGED_FILES="${CHANGED_FILES//$'\r'/'%0D'}"
