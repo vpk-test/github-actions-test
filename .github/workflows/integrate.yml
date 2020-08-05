@@ -6,6 +6,15 @@ on:
       - master
 
 jobs:
+  check_failure:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+      - run: echo "hello"
+        if: github.actor == 'vpk-test'
+        env:
+          VALUE: value
+  
   github-autoapprove:
     runs-on: ubuntu-latest
     steps:
