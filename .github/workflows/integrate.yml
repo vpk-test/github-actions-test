@@ -54,7 +54,9 @@ jobs:
           ref: ${{ github.head_ref }}
       - run: echo "Build triggered by ${{ github.head_ref }} PR"
       - name: Set env
-        run: echo "::set-env name=CHANGED_FILES::$(git diff --name-only origin/master...${{ github.head_ref }} -- *)"
+        run: |
+          CHANGED_FILES="$(git diff --name-only origin/master...${{ github.head_ref }} -- *)"
+          echo "::set-env name=CHANGED_FILES::$CHANGE_FILES"
       - name: print set env value
         run: echo $CHANGED_FILES
       - name: print set env value
