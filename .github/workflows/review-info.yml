@@ -1,6 +1,9 @@
 name: PR approval info
 
 on:
+  #push:
+  #  paths: 
+  #    - '**/*'
   pull_request:
     branches:
       - master
@@ -8,10 +11,9 @@ on:
     types:
       - submitted
 
-
 jobs:
   count_reviews:
-    if: github.head_ref == 'github-action-changes'
+    if: github.event.pull_request.head.ref == 'github-action-changes' && (github.event_name != 'pull_request' || github.event.action != 'opened')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v2
@@ -28,5 +30,7 @@ jobs:
               const reviewCount = new Set(reviews.filter(({ state }) => state === 'APPROVED').map(({ user }) => user.id)).size;
               if (reviewCount < 2) throw new Error("You require at least 2 reviews for this PR");
             });
+            
+
             
             

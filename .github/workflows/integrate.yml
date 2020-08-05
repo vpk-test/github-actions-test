@@ -49,7 +49,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print message
-        run: sleep 120000 && echo "Build triggered by ${{ github.head_ref }} PR"
+        run: echo "Build triggered by ${{ github.head_ref }} PR"
+      - name: Set env
+        run: echo "::set-env name=CHANGED_FILES::$(git diff --name-only origin/master...${{ github.head_ref }} -- *)"
+      - name: print set env value
+        run: echo $CHANGED_FILES
+      - name: print set env value
+        run: echo "$CHANGED_FILES"
+      - name: print set env value
+        run: echo "${{ env.CHANGED_FILES }}"
+
   test:
     runs-on: ubuntu-latest
     steps:

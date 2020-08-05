@@ -2,7 +2,7 @@ name: Create a new branch and open PR
 on:
   push:
     branches:
-      - test-patch
+      - non-existent-branch
 
 jobs:
   create-pr:
