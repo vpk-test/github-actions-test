@@ -55,10 +55,10 @@ jobs:
       - run: echo "Build triggered by ${{ github.head_ref }} PR"
       - name: Set env
         run: |
-          CHANGED_FILES="$(git diff --name-only origin/master...${{ github.head_ref }} -- *)
-          CHANGED_FILES="${CHANGED_FILES//'%'/'%25'}"
+          CHANGED_FILES="$(git diff --name-only origin/master...${{ github.head_ref }} -- *)"
+          # CHANGED_FILES="${CHANGED_FILES//'%'/'%25'}"
           CHANGED_FILES="${CHANGED_FILES//$'\n'/'%0A'}"
-          CHANGED_FILES="${CHANGED_FILES//$'\r'/'%0D'}"
+          # CHANGED_FILES="${CHANGED_FILES//$'\r'/'%0D'}"
           echo "::set-env name=CHANGED_FILES::$CHANGED_FILES"
       - name: print set env value
         run: echo $CHANGED_FILES
