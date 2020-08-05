@@ -49,8 +49,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Print message
-        run: echo "Build triggered by ${{ github.head_ref }} PR"
+        with:
+          fetch-depth: 0
+      - run: echo "Build triggered by ${{ github.head_ref }} PR"
       - name: Set env
         run: echo "::set-env name=CHANGED_FILES::$(git diff --name-only origin/master...${{ github.head_ref }} -- *)"
       - name: print set env value
