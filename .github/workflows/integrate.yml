@@ -56,7 +56,7 @@ jobs:
       - name: Set env
         run: |
           CHANGED_FILES="$(git diff --name-only origin/master...${{ github.head_ref }} -- *)"
-          echo "::set-env name=CHANGED_FILES::$CHANGE_FILES"
+          echo "::set-env name=CHANGED_FILES::$CHANGED_FILES"
       - name: print set env value
         run: echo $CHANGED_FILES
       - name: print set env value
