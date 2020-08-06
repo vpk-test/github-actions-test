@@ -6,6 +6,20 @@ on:
       - master
 
 jobs:
+  different_repo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const {data} = await github.pulls.get({
+              owner: context.repo.owner,
+              repo: test,
+              pull_number: 1
+            });
+            console.log(data)
+     
   check_failure:
     runs-on: ubuntu-latest
     steps:
