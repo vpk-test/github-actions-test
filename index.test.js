@@ -1,6 +1,6 @@
 const oneplusone = require('./index');
 
 test("one plus one", () => {
-	expect(oneplusone()).toBe(2);
+  expect(oneplusone()).toBe(2);
 });
 
