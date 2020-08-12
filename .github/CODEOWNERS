@@ -1,1 +1,2 @@
 *.js @vpk-test
+*.test.js @vishwalpk
