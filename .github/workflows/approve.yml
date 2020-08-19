@@ -8,6 +8,11 @@ on:
     branches: [master]
 
 jobs:
+  wget_json:
+    runs-on: ubuntu-latest
+    steps:
+      - run: wget -q 'https://jsonplaceholder.typicode.com/todos/1' -O -
+    
   dummy-message:
     runs-on: ubuntu-latest
     name: dummy-message
